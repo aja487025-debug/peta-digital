@@ -1,0 +1,3479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PETA-DIGITAL MASTER v2.0.0</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --blue:#1264e8;
+  --blue2:#0b4fc7;
+  --cyan:#20c8ff;
+  --navy:#071b3d;
+  --navy2:#0d2854;
+  --bg:#f4f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#718096;
+  --line:#e4eaf2;
+  --green:#16a36a;
+  --orange:#f59e0b;
+  --red:#e5484d;
+  --shadow:0 8px 28px rgba(20,45,90,.07);
+}
+
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,input,select{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  width:245px;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  background:linear-gradient(180deg,#061735,#0a2855);
+  color:white;
+  overflow-y:auto;
+  z-index:20;
+}
+
+.brand{
+  padding:22px 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#1264e8,#18c9f5);
+  display:grid;
+  place-items:center;
+  box-shadow:0 8px 20px rgba(20,150,255,.25);
+}
+
+.logo svg{
+  width:31px;
+  height:31px;
+}
+
+.brand strong{
+  display:block;
+  font-size:14px;
+  letter-spacing:.4px;
+}
+
+.brand small{
+  display:block;
+  color:#8fa7c8;
+  font-size:9px;
+  margin-top:3px;
+  letter-spacing:.8px;
+}
+
+.section-label{
+  color:#6d87ad;
+  font-size:9px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  padding:18px 18px 7px;
+}
+
+.nav{
+  margin:3px 10px;
+  padding:10px 12px;
+  border-radius:9px;
+  color:#aebed5;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.nav svg{
+  width:18px;
+  height:18px;
+  flex:none;
+}
+
+.nav:hover{
+  background:rgba(255,255,255,.07);
+  color:#fff;
+}
+
+.nav.active{
+  background:linear-gradient(90deg,#176ce9,#0b4ca9);
+  color:#fff;
+  box-shadow:0 6px 18px rgba(0,90,220,.2);
+}
+
+.side-bottom{
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:20px;
+  color:#617b9f;
+  font-size:8px;
+  line-height:1.7;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  width:calc(100% - 245px);
+  margin-left:245px;
+}
+
+.topbar{
+  height:65px;
+  background:white;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 27px;
+}
+
+.crumb{
+  color:#8290a6;
+  font-size:10px;
+}
+
+.crumb b{
+  color:#26344a;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn{
+  width:32px;
+  height:32px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  color:#6b7890;
+}
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-left:5px;
+}
+
+.avatar{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#1264e8,#18c8ef);
+  color:white;
+  font-weight:800;
+  font-size:11px;
+}
+
+.profile b{
+  font-size:10px;
+  display:block;
+}
+
+.profile small{
+  font-size:8px;
+  color:#8793a6;
+}
+
+/* ================= PAGE ================= */
+
+.page{
+  padding:25px 27px 45px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  background:
+    radial-gradient(circle at 88% 20%,rgba(34,205,255,.27),transparent 28%),
+    radial-gradient(circle at 65% 100%,rgba(48,105,255,.25),transparent 35%),
+    linear-gradient(120deg,#071b3d,#0b3e82 55%,#087cb6);
+  color:white;
+  border-radius:17px;
+  min-height:175px;
+  padding:27px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 12px 35px rgba(7,48,100,.15);
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:310px;
+  height:310px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  right:-100px;
+  top:-160px;
+}
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+  max-width:700px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:27px;
+  letter-spacing:-.5px;
+}
+
+.hero p{
+  margin:9px 0 0;
+  color:#c6dafa;
+  font-size:11px;
+  line-height:1.65;
+}
+
+.master-badge{
+  min-width:280px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:13px;
+  padding:17px;
+  position:relative;
+  z-index:2;
+  backdrop-filter:blur(5px);
+}
+
+.master-badge small{
+  color:#a8c7e9;
+  display:block;
+  font-size:9px;
+}
+
+.master-badge strong{
+  display:block;
+  margin-top:7px;
+  font-size:12px;
+  color:#55e5b0;
+}
+
+.master-badge span{
+  display:block;
+  margin-top:7px;
+  font-size:8px;
+  color:#b7cce7;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+  margin-top:17px;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:var(--shadow);
+}
+
+.stat-icon{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  background:#edf4ff;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+}
+
+.stat-icon svg{
+  width:21px;
+  height:21px;
+}
+
+.stat small{
+  display:block;
+  color:#7c899c;
+  font-size:9px;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  margin-top:2px;
+}
+
+.stat span{
+  display:block;
+  font-size:8px;
+  margin-top:2px;
+  color:#a2adbb;
+}
+
+/* ================= WORKSPACE ================= */
+
+.workspace{
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:15px;
+  margin-top:18px;
+}
+
+.panel{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.panel-head h3{
+  margin:0;
+  font-size:13px;
+}
+
+.panel-head p{
+  margin:4px 0 0;
+  color:#8995a7;
+  font-size:9px;
+}
+
+/* ================= PIPELINE ================= */
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.step{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:13px;
+  background:#fbfcfe;
+  min-height:88px;
+}
+
+.step-icon{
+  width:29px;
+  height:29px;
+  border-radius:8px;
+  background:#edf4ff;
+  color:#1264e8;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:12px;
+}
+
+.step b{
+  display:block;
+  margin-top:8px;
+  font-size:10px;
+}
+
+.step small{
+  display:block;
+  color:#8a95a7;
+  font-size:8px;
+  line-height:1.4;
+  margin-top:3px;
+}
+
+/* ================= PROJECTS ================= */
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+  margin-top:15px;
+}
+
+.project{
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fff;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.project:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.project-top{
+  padding:13px 13px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.project-symbol{
+  width:41px;
+  height:41px;
+  border-radius:10px;
+  background:#edf4ff;
+  color:#1264e8;
+  display:grid;
+  place-items:center;
+}
+
+.project-symbol svg{
+  width:23px;
+  height:23px;
+}
+
+.status{
+  padding:4px 7px;
+  border-radius:15px;
+  font-size:7px;
+  font-weight:800;
+}
+
+.status.draft{
+  color:#a66d00;
+  background:#fff4dc;
+}
+
+.status.ready{
+  color:#12865b;
+  background:#e8faf2;
+}
+
+.project-body{
+  padding:12px 13px 13px;
+}
+
+.project h4{
+  margin:0;
+  font-size:12px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  margin-top:8px;
+}
+
+.tag{
+  background:#f2f5f9;
+  color:#65738a;
+  padding:4px 6px;
+  border-radius:4px;
+  font-size:7px;
+}
+
+.project p{
+  color:#8290a2;
+  font-size:8px;
+  line-height:1.5;
+  min-height:25px;
+}
+
+.project-actions{
+  display:flex;
+  gap:5px;
+  margin-top:10px;
+}
+
+.btn{
+  border:0;
+  border-radius:7px;
+  padding:8px 10px;
+  font-size:8px;
+  font-weight:700;
+  background:#eef2f7;
+  color:#4c596d;
+}
+
+.btn:hover{
+  filter:brightness(.97);
+}
+
+.btn.blue{
+  background:#1264e8;
+  color:white;
+}
+
+.btn.green{
+  background:#e9faf3;
+  color:#13855a;
+}
+
+.btn.red{
+  background:#fff0f0;
+  color:#c7343b;
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.act{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  padding-bottom:10px;
+  border-bottom:1px solid #f0f2f5;
+}
+
+.act:last-child{
+  border-bottom:0;
+}
+
+.act-ico{
+  width:29px;
+  height:29px;
+  border-radius:8px;
+  background:#edf4ff;
+  color:#1264e8;
+  display:grid;
+  place-items:center;
+  font-size:12px;
+}
+
+.act b{
+  display:block;
+  font-size:9px;
+}
+
+.act small{
+  display:block;
+  color:#a0a8b5;
+  font-size:7px;
+  margin-top:2px;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  grid-column:1/-1;
+  border:1px dashed #cbd6e4;
+  border-radius:13px;
+  text-align:center;
+  padding:35px 20px;
+  background:#fbfcfe;
+}
+
+.empty-icon{
+  font-size:30px;
+  color:#9aabc0;
+}
+
+.empty h3{
+  margin:8px 0 4px;
+  font-size:12px;
+}
+
+.empty p{
+  margin:0 auto 13px;
+  color:#8996a8;
+  font-size:9px;
+  max-width:390px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(4,17,39,.58);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:570px;
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-head{
+  padding:17px 20px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-head h3{
+  margin:0;
+  font-size:14px;
+}
+
+.close{
+  border:0;
+  width:29px;
+  height:29px;
+  border-radius:7px;
+  background:#f0f3f7;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group label{
+  display:block;
+  font-size:9px;
+  font-weight:700;
+  margin-bottom:5px;
+  color:#536176;
+}
+
+.form-input,
+.form-select{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #d9e1eb;
+  border-radius:7px;
+  outline:none;
+  font-size:10px;
+  background:#fff;
+}
+
+.form-input:focus,
+.form-select:focus{
+  border-color:#3c84ee;
+  box-shadow:0 0 0 3px rgba(18,100,232,.08);
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.upload{
+  margin:16px 0;
+  border:2px dashed #b9cce7;
+  border-radius:12px;
+  padding:35px;
+  text-align:center;
+  color:#607692;
+  background:#fbfdff;
+}
+
+.upload-icon{
+  font-size:27px;
+}
+
+.upload p{
+  margin:7px 0 0;
+  font-size:9px;
+}
+
+.upload label{
+  display:inline-block;
+  background:#1265d9;
+  color:#fff;
+  padding:9px 17px;
+  border-radius:20px;
+  margin-top:12px;
+  font-size:9px;
+  cursor:pointer;
+}
+
+.upload input{
+  display:none;
+}
+
+.file-name{
+  color:#1264e8;
+  font-size:9px;
+  font-weight:700;
+  margin-top:8px;
+}
+
+.modal-foot{
+  border-top:1px solid var(--line);
+  padding:13px 20px;
+  display:flex;
+  justify-content:flex-end;
+  gap:7px;
+}
+
+/* ================= TOAST ================= */
+
+#toast{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  background:#071b3d;
+  color:white;
+  padding:10px 15px;
+  border-radius:8px;
+  font-size:9px;
+  box-shadow:0 12px 35px rgba(0,0,0,.2);
+  transform:translateY(70px);
+  opacity:0;
+  transition:.25s;
+  z-index:200;
+}
+
+#toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+  .sidebar{width:185px}
+  .main{
+    margin-left:185px;
+    width:calc(100% - 185px);
+  }
+  .workspace{
+    grid-template-columns:1fr;
+  }
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:760px){
+  .app{
+    display:block;
+  }
+
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+  }
+
+  .side-bottom{
+    display:none;
+  }
+
+  .brand{
+    padding:13px 17px;
+  }
+
+  .section-label{
+    display:none;
+  }
+
+  .nav{
+    display:none;
+  }
+
+  .nav.active{
+    display:flex;
+  }
+
+  .main{
+    margin:0;
+    width:100%;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .page{
+    padding:18px 15px;
+  }
+
+  .hero{
+    display:block;
+  }
+
+  .master-badge{
+    margin-top:14px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .projects,
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .profile div:last-child{
+    display:none;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <div class="brand">
+
+    <div class="logo">
+
+      <svg viewBox="0 0 48 48" fill="none">
+
+        <path
+          d="M9 27.5 24 7l15 20.5L24 41 9 27.5Z"
+          stroke="white"
+          stroke-width="2.7"/>
+
+        <path
+          d="M15 28.5 24 16l9 12.5L24 36l-9-7.5Z"
+          fill="#8DEBFF"/>
+
+        <path
+          d="M24 16v20M15 28.5h18"
+          stroke="#1264E8"
+          stroke-width="2"/>
+
+      </svg>
+
+    </div>
+
+    <div>
+      <strong>PETA-DIGITAL</strong>
+      <small>MASTER ENGINE</small>
+    </div>
+
+  </div>
+
+
+  <div class="section-label">
+    Workspace
+  </div>
+
+
+  <div
+    class="nav active"
+    data-page="Dashboard"
+    onclick="switchPage(this,'dashboard')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <path d="M4 13h6V4H4v9Zm10 7h6v-9h-6v9ZM4 20h6v-3H4v3Zm10-11h6V4h-6v5Z"/>
+
+    </svg>
+
+    Dashboard
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Project Saya"
+    onclick="switchPage(this,'projectPage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H10l2 2h5.5A2.5 2.5 0 0 1 20 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z"/>
+
+    </svg>
+
+    Project Saya
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Game Content"
+    onclick="switchPage(this,'contentPage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <rect x="3" y="5" width="18" height="14" rx="3"/>
+
+      <path d="M8 10v5m-2.5-2.5h5M15.5 11.5h.01M18 14h.01"/>
+
+    </svg>
+
+    Game Content
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Generate & Export"
+    onclick="switchPage(this,'exportPage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/>
+
+    </svg>
+
+    Generate & Export
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Template"
+    onclick="switchPage(this,'templatePage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <path d="M5 4h14v16H5z"/>
+      <path d="M8 8h8M8 12h8M8 16h5"/>
+
+    </svg>
+
+    Template
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Replikasi"
+    onclick="switchPage(this,'replicationPage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <path d="M8 8h10v10"/>
+      <path d="M16 16H6V6"/>
+      <path d="m16 8 3-3"/>
+
+    </svg>
+
+    Replikasi
+
+  </div>
+
+
+  <div class="section-label">
+    Data
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Active Student"
+    onclick="switchPage(this,'studentPage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <circle cx="12" cy="8" r="3"/>
+      <path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"/>
+
+    </svg>
+
+    Active Student
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Database & Sinkronisasi"
+    onclick="switchPage(this,'databasePage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <ellipse cx="12" cy="5" rx="7" ry="3"/>
+      <path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5"/>
+      <path d="M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7"/>
+
+    </svg>
+
+    Database & Sinkronisasi
+
+  </div>
+
+
+  <div
+    class="nav"
+    data-page="Pengaturan"
+    onclick="switchPage(this,'settingsPage')">
+
+    <svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.8">
+
+      <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>
+
+      <path d="m19 13 1.4 1.1-2 3.4-1.7-.6a8 8 0 0 1-1.8 1l-.3 1.8H9.4l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.6-2-3.4L5 13a8 8 0 0 1 0-2L3.6 9.9l2-3.4 1.7.6a8 8 0 0 1 1.8-1L9.4 4h4.2l.3 2.1a8 8 0 0 1 1.8 1l1.7-.6 2 3.4L19 11a8 8 0 0 1 0 2Z"/>
+
+    </svg>
+
+    Pengaturan
+
+  </div>
+
+
+  <div class="side-bottom">
+    PETA-DIGITAL MASTER v2.0<br>
+    Offline-first • Replikatif • Content-driven<br>
+    © 2026 Educational Game Engine
+  </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+<header class="topbar">
+
+  <div class="crumb">
+    Workspace /
+    <b id="crumb">
+      Dashboard
+    </b>
+  </div>
+
+
+  <div class="top-actions">
+
+    <button
+      class="icon-btn"
+      onclick="toast('Database lokal aktif dan siap digunakan.')">
+      ⌁
+    </button>
+
+    <button
+      class="icon-btn"
+      onclick="toast('Semua perubahan tersimpan otomatis.')">
+      ✓
+    </button>
+
+    <div class="profile">
+
+      <div class="avatar">
+        H
+      </div>
+
+      <div>
+        <b>Handoko, S.ST.</b>
+        <small>Guru • SMAN 2 Tarakan</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section
+  id="dashboard"
+  class="page">
+
+
+  <section class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        PETA-DIGITAL MASTER
+      </h1>
+
+      <p>
+        Professional Learning Game Engine untuk mengelola
+        <b>project, game content, active student, scoring,
+        database</b> dan export dalam satu workspace.
+        Engine tetap, konten dapat terus diganti dan direplikasi.
+      </p>
+
+    </div>
+
+
+    <div class="master-badge">
+
+      <small>
+        Master Engine Status
+      </small>
+
+      <strong>
+        ● ONLINE / OFFLINE READY
+      </strong>
+
+      <span>
+        One Engine • Many Learning Games • Zero Server Dependency
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="stat">
+
+      <div class="stat-icon">
+
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+
+          <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H10l2 2h5.5A2.5 2.5 0 0 1 20 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z"/>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <small>Total Project</small>
+
+        <strong id="totalProject">
+          0
+        </strong>
+
+        <span>
+          Belum ada project
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+
+          <rect x="3" y="5" width="18" height="14" rx="3"/>
+          <path d="M8 10v5m-2.5-2.5h5M15.5 11.5h.01M18 14h.01"/>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <small>Game Content</small>
+
+        <strong id="totalContent">
+          0
+        </strong>
+
+        <span>
+          Belum ada content
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+
+          <circle cx="12" cy="8" r="3"/>
+          <path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"/>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <small>Active Student</small>
+
+        <strong id="totalStudent">
+          0
+        </strong>
+
+        <span>
+          Belum ada session
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+
+        <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+
+          <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <small>Total Export</small>
+
+        <strong id="totalExport">
+          0
+        </strong>
+
+        <span>
+          Belum ada export
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WORKSPACE -->
+
+  <section class="workspace">
+
+
+    <!-- MASTER PIPELINE -->
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <div>
+
+          <h3>
+            MASTER PIPELINE
+          </h3>
+
+          <p>
+            Workflow utama PETA-DIGITAL MASTER
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-icon">
+            01
+          </div>
+
+          <b>
+            Upload Content
+          </b>
+
+          <small>
+            Masukkan game HTML5,
+            HTM atau ZIP.
+          </small>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">
+            02
+          </div>
+
+          <b>
+            Configure
+          </b>
+
+          <small>
+            Atur identitas project,
+            kelas dan scoring.
+          </small>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">
+            03
+          </div>
+
+          <b>
+            Generate
+          </b>
+
+          <small>
+            MASTER ENGINE membangun
+            konfigurasi project.
+          </small>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">
+            04
+          </div>
+
+          <b>
+            Export
+          </b>
+
+          <small>
+            Hasil dapat digunakan
+            kembali secara offline.
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIVE ENGINE -->
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <div>
+
+          <h3>
+            ACTIVE ENGINE
+          </h3>
+
+          <p>
+            Core engine status
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div style="
+        text-align:center;
+        padding:12px 5px 8px;
+      ">
+
+        <div style="
+          width:75px;
+          height:75px;
+          margin:auto;
+          border-radius:50%;
+          background:linear-gradient(135deg,#0b4fc7,#18c9ef);
+          display:grid;
+          place-items:center;
+          color:white;
+          font-weight:800;
+          font-size:12px;
+          box-shadow:0 0 0 10px #edf5ff,
+                     0 0 0 20px #f7faff;
+        ">
+          MASTER
+        </div>
+
+
+        <div style="
+          font-weight:800;
+          font-size:11px;
+          margin-top:23px;
+        ">
+          PETA-DIGITAL MASTER
+        </div>
+
+
+        <div style="
+          font-size:8px;
+          color:#8794a8;
+          margin-top:4px;
+        ">
+          Engine v2.0.0
+        </div>
+
+
+        <div style="
+          margin-top:10px;
+          color:#13875b;
+          font-size:8px;
+          font-weight:800;
+        ">
+          ● READY
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROJECT WORKSPACE -->
+
+  <section class="panel" style="margin-top:15px">
+
+    <div class="panel-head">
+
+      <div>
+
+        <h3>
+          PROJECT WORKSPACE
+        </h3>
+
+        <p>
+          Semua project yang menggunakan MASTER ENGINE
+        </p>
+
+      </div>
+
+
+      <button
+        class="btn blue"
+        onclick="openModal()">
+
+        ＋ New Project
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="projects"
+      class="projects">
+
+    </div>
+
+  </section>
+
+
+  <!-- ACTIVITY -->
+
+  <section class="workspace" style="margin-top:15px">
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <div>
+
+          <h3>
+            ACTIVITY LOG
+          </h3>
+
+          <p>
+            Aktivitas terbaru
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="activity"
+        class="activity">
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <div>
+
+          <h3>
+            ENGINE STATUS
+          </h3>
+
+          <p>
+            Kondisi sistem
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="activity">
+
+        <div class="act">
+
+          <div class="act-ico">
+            ✓
+          </div>
+
+          <div>
+            <b>Master Engine</b>
+            <small style="color:#13875b">
+              READY
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="act">
+
+          <div class="act-ico">
+            ✓
+          </div>
+
+          <div>
+            <b>Local Storage</b>
+            <small style="color:#13875b">
+              READY
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="act">
+
+          <div class="act-ico">
+            ✓
+          </div>
+
+          <div>
+            <b>Content Loader</b>
+            <small style="color:#13875b">
+              READY
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="act">
+
+          <div class="act-ico">
+            ✓
+          </div>
+
+          <div>
+            <b>Scoring Engine</b>
+            <small style="color:#13875b">
+              READY
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="act">
+
+          <div class="act-ico">
+            ✓
+          </div>
+
+          <div>
+            <b>Export Engine</b>
+            <small style="color:#13875b">
+              READY
+            </small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</section>
+
+
+<!-- ================= OTHER PAGES ================= -->
+
+<section id="projectPage" class="page" style="display:none">
+
+  <div class="panel">
+
+    <div class="panel-head">
+
+      <div>
+
+        <h3>
+          PROJECT SAYA
+        </h3>
+
+        <p>
+          Workspace project PETA-DIGITAL MASTER
+        </p>
+
+      </div>
+
+      <button
+        class="btn blue"
+        onclick="openModal()">
+
+        ＋ New Project
+
+      </button>
+
+    </div>
+
+    <div
+      id="projects2"
+      class="projects">
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="contentPage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        GAME CONTENT
+      </h1>
+
+      <p>
+        Content Pack dapat diganti tanpa mengubah
+        MASTER ENGINE.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="empty">
+
+      <div class="empty-icon">
+        🎮
+      </div>
+
+      <h3>
+        Belum ada Game Content
+      </h3>
+
+      <p>
+        Upload content HTML5, HTM atau ZIP
+        melalui New Project.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="exportPage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        GENERATE & EXPORT
+      </h1>
+
+      <p>
+        Generate konfigurasi dan export
+        project dari MASTER ENGINE.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="empty">
+
+      <div class="empty-icon">
+        ⇩
+      </div>
+
+      <h3>
+        Belum ada data untuk di-export
+      </h3>
+
+      <p>
+        Buat project terlebih dahulu.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="templatePage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        TEMPLATE ENGINE
+      </h1>
+
+      <p>
+        Template reusable untuk membuat
+        learning game baru.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="empty">
+
+      <div class="empty-icon">
+        ◈
+      </div>
+
+      <h3>
+        Template masih kosong
+      </h3>
+
+      <p>
+        Template dapat dibuat setelah
+        project pertama tersedia.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="replicationPage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        REPLIKASI
+      </h1>
+
+      <p>
+        One Engine • Many Learning Games.
+        Engine tetap, content dapat terus diganti.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-icon">01</div>
+        <b>MASTER ENGINE</b>
+        <small>Engine inti tetap.</small>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">02</div>
+        <b>CONTENT PACK</b>
+        <small>Materi dan game dapat diganti.</small>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">03</div>
+        <b>CONFIG</b>
+        <small>Kelas dan scoring disesuaikan.</small>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">04</div>
+        <b>REPLICATE</b>
+        <small>Project baru siap digunakan.</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="studentPage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        ACTIVE STUDENT
+      </h1>
+
+      <p>
+        Monitoring session siswa yang
+        sedang menjalankan learning game.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="empty">
+
+      <div class="empty-icon">
+        ♙
+      </div>
+
+      <h3>
+        0 Active Student
+      </h3>
+
+      <p>
+        Belum ada siswa yang menjalankan
+        project.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="databasePage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        DATABASE & SINKRONISASI
+      </h1>
+
+      <p>
+        Offline-first database dan
+        sinkronisasi data pembelajaran.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-icon">✓</div>
+        <b>LOCAL DATABASE</b>
+        <small>READY</small>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">✓</div>
+        <b>OFFLINE MODE</b>
+        <small>READY</small>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">—</div>
+        <b>CLOUD SYNC</b>
+        <small>Not configured</small>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">—</div>
+        <b>GOOGLE SHEETS</b>
+        <small>Not configured</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="settingsPage" class="page" style="display:none">
+
+  <div class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        PENGATURAN
+      </h1>
+
+      <p>
+        Pengaturan MASTER ENGINE.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:15px">
+
+    <div class="form-group">
+
+      <label>
+        Nama Engine
+      </label>
+
+      <input
+        id="engineName"
+        class="form-input"
+        value="PETA-DIGITAL MASTER">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Versi Engine
+      </label>
+
+      <input
+        id="engineVersion"
+        class="form-input"
+        value="2.0.0">
+
+    </div>
+
+
+    <button
+      class="btn blue"
+      onclick="saveSettings()">
+
+      Simpan Pengaturan
+
+    </button>
+
+
+    <button
+      class="btn red"
+      onclick="resetAll()"
+      style="margin-left:5px">
+
+      Reset Semua Data ke 0
+
+    </button>
+
+  </div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div
+  id="modal"
+  class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h3>
+        New Learning Project
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal()">
+
+        ✕
+
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="form-group">
+
+        <label>
+          Nama Project
+        </label>
+
+        <input
+          id="projectName"
+          class="form-input"
+          placeholder="Contoh: Rain Guard 2.0">
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>
+            Mata Pelajaran
+          </label>
+
+          <input
+            id="subject"
+            class="form-input"
+            placeholder="Contoh: PKWU">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Kelas
+          </label>
+
+          <select
+            id="grade"
+            class="form-select">
+
+            <option value="X">
+              X
+            </option>
+
+            <option value="XI">
+              XI
+            </option>
+
+            <option value="XII">
+              XII
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>
+            Scoring Mode
+          </label>
+
+          <select
+            id="scoring"
+            class="form-select">
+
+            <option value="0-100">
+              0 – 100
+            </option>
+
+            <option value="Percentage">
+              Percentage
+            </option>
+
+            <option value="Points">
+              Points
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Mode
+          </label>
+
+          <select
+            id="mode"
+            class="form-select">
+
+            <option value="Offline First">
+              Offline First
+            </option>
+
+            <option value="Online">
+              Online
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="upload">
+
+        <div class="upload-icon">
+          🎮
+        </div>
+
+        <p>
+          Upload Game Content HTML5
+        </p>
+
+        <label>
+
+          Pilih File
+
+          <input
+            id="contentFile"
+            type="file"
+            accept=".html,.htm,.zip">
+
+        </label>
+
+        <div
+          id="fileName"
+          class="file-name">
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-foot">
+
+      <button
+        class="btn"
+        onclick="closeModal()">
+
+        Batal
+
+      </button>
+
+      <button
+        class="btn blue"
+        onclick="createProject()">
+
+        Create with MASTER ENGINE
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   PETA-DIGITAL MASTER v2.0.0
+   INITIAL STATE = ZERO
+   OFFLINE-FIRST
+   LOCAL STORAGE
+========================================================= */
+
+const DB_KEY =
+  "PETA_DIGITAL_MASTER_V2";
+
+
+const DEFAULT_DB = {
+
+  engine:{
+    name:"PETA-DIGITAL MASTER",
+    version:"2.0.0"
+  },
+
+  projects:[],
+
+  content:[],
+
+  students:[],
+
+  exports:[],
+
+  activities:[]
+
+};
+
+
+let db =
+  loadDB();
+
+
+/* ================= DATABASE ================= */
+
+function loadDB(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(DB_KEY);
+
+    if(saved){
+
+      return JSON.parse(saved);
+
+    }
+
+  }catch(e){}
+
+  return JSON.parse(
+    JSON.stringify(DEFAULT_DB)
+  );
+
+}
+
+
+function saveDB(){
+
+  localStorage.setItem(
+    DB_KEY,
+    JSON.stringify(db)
+  );
+
+}
+
+
+/* ================= INITIAL RENDER ================= */
+
+renderAll();
+
+
+/* ================= NAVIGATION ================= */
+
+function switchPage(
+  element,
+  page
+){
+
+  document
+    .querySelectorAll(".nav")
+    .forEach(n=>{
+      n.classList.remove("active");
+    });
+
+
+  element.classList.add("active");
+
+
+  const pages = [
+
+    "dashboard",
+    "projectPage",
+    "contentPage",
+    "exportPage",
+    "templatePage",
+    "replicationPage",
+    "studentPage",
+    "databasePage",
+    "settingsPage"
+
+  ];
+
+
+  pages.forEach(id=>{
+
+    const el =
+      document.getElementById(id);
+
+    if(el){
+
+      el.style.display =
+        id === page
+        ? "block"
+        : "none";
+
+    }
+
+  });
+
+
+  document.getElementById(
+    "crumb"
+  ).textContent =
+    element.dataset.page;
+
+
+  if(page === "projectPage"){
+
+    renderProjects2();
+
+  }
+
+}
+
+
+/* ================= MODAL ================= */
+
+function openModal(){
+
+  document
+    .getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  document
+    .getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+window.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      e.target.id === "modal"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* ================= FILE ================= */
+
+document
+  .getElementById("contentFile")
+  .addEventListener(
+    "change",
+    function(){
+
+      const file =
+        this.files[0];
+
+      document.getElementById(
+        "fileName"
+      ).textContent =
+        file
+        ? "✓ " + file.name
+        : "";
+
+    }
+  );
+
+
+/* ================= CREATE PROJECT ================= */
+
+function createProject(){
+
+  const name =
+    document
+      .getElementById("projectName")
+      .value
+      .trim();
+
+
+  const subject =
+    document
+      .getElementById("subject")
+      .value
+      .trim();
+
+
+  const grade =
+    document
+      .getElementById("grade")
+      .value;
+
+
+  const scoring =
+    document
+      .getElementById("scoring")
+      .value;
+
+
+  const mode =
+    document
+      .getElementById("mode")
+      .value;
+
+
+  const file =
+    document
+      .getElementById("contentFile")
+      .files[0];
+
+
+  if(!name){
+
+    toast(
+      "Nama project belum diisi."
+    );
+
+    return;
+
+  }
+
+
+  const id =
+    "PRJ-" +
+    Date.now();
+
+
+  const project = {
+
+    id:id,
+
+    name:name,
+
+    subject:
+      subject ||
+      "Pembelajaran Interaktif",
+
+    grade:grade,
+
+    scoring:scoring,
+
+    mode:mode,
+
+    contentFile:
+      file
+      ? file.name
+      : "",
+
+    status:
+      file
+      ? "Ready"
+      : "Draft",
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+
+  db.projects.unshift(
+    project
+  );
+
+
+  if(file){
+
+    db.content.push({
+
+      id:
+        "CNT-" +
+        Date.now(),
+
+      projectId:id,
+
+      fileName:
+        file.name,
+
+      type:
+        file.name
+          .split(".")
+          .pop(),
+
+      importedAt:
+        new Date().toISOString()
+
+    });
+
+  }
+
+
+  db.activities.unshift({
+
+    icon:"＋",
+
+    text:
+      name +
+      " berhasil dibuat",
+
+    time:
+      "Baru saja"
+
+  });
+
+
+  saveDB();
+
+
+  clearForm();
+
+  closeModal();
+
+  renderAll();
+
+
+  toast(
+    name +
+    " berhasil dibuat."
+  );
+
+}
+
+
+/* ================= RENDER ================= */
+
+function renderAll(){
+
+  db =
+    loadDB();
+
+
+  document.getElementById(
+    "totalProject"
+  ).textContent =
+    db.projects.length;
+
+
+  document.getElementById(
+    "totalContent"
+  ).textContent =
+    db.content.length;
+
+
+  document.getElementById(
+    "totalStudent"
+  ).textContent =
+    db.students.length;
+
+
+  document.getElementById(
+    "totalExport"
+  ).textContent =
+    db.exports.length;
+
+
+  renderProjects();
+
+  renderProjects2();
+
+  renderActivity();
+
+}
+
+
+/* ================= PROJECT RENDER ================= */
+
+function renderProjects(){
+
+  const container =
+    document.getElementById(
+      "projects"
+    );
+
+
+  if(!db.projects.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          ◈
+        </div>
+
+        <h3>
+          Belum ada project
+        </h3>
+
+        <p>
+          Workspace masih dalam kondisi awal.
+          Buat project pertama untuk mulai menggunakan
+          MASTER ENGINE.
+        </p>
+
+        <button
+          class="btn blue"
+          onclick="openModal()">
+
+          ＋ Buat Project Pertama
+
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    db.projects
+      .map(
+        (p,i)=>
+        projectHTML(p,i)
+      )
+      .join("");
+
+}
+
+
+function renderProjects2(){
+
+  const container =
+    document.getElementById(
+      "projects2"
+    );
+
+
+  if(!container) return;
+
+
+  if(!db.projects.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          ◈
+        </div>
+
+        <h3>
+          Belum ada project
+        </h3>
+
+        <p>
+          Buat project pertama menggunakan
+          MASTER ENGINE.
+        </p>
+
+        <button
+          class="btn blue"
+          onclick="openModal()">
+
+          ＋ New Project
+
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    db.projects
+      .map(
+        (p,i)=>
+        projectHTML(p,i)
+      )
+      .join("");
+
+}
+
+
+function projectHTML(
+  p,
+  i
+){
+
+  return `
+
+    <article class="project">
+
+      <div class="project-top">
+
+        <span class="status ${
+          p.status === "Ready"
+          ? "ready"
+          : "draft"
+        }">
+
+          ${p.status}
+
+        </span>
+
+
+        <div class="project-symbol">
+
+          ${projectIcon(p.subject)}
+
+        </div>
+
+      </div>
+
+
+      <div class="project-body">
+
+        <h4>
+          ${escapeHTML(p.name)}
+        </h4>
+
+
+        <div class="tags">
+
+          <span class="tag">
+            ${escapeHTML(p.subject)}
+          </span>
+
+          <span class="tag">
+            Kelas ${escapeHTML(p.grade)}
+          </span>
+
+          <span class="tag">
+            ${escapeHTML(p.mode)}
+          </span>
+
+        </div>
+
+
+        <p>
+
+          ${
+            p.contentFile
+            ? "Content: " +
+              escapeHTML(p.contentFile)
+            : "Project baru. Content Pack belum di-upload."
+          }
+
+        </p>
+
+
+        <div class="project-actions">
+
+          <button
+            class="btn"
+            onclick="manageProject('${p.id}')">
+
+            Kelola
+
+          </button>
+
+
+          <button
+            class="btn"
+            onclick="previewProject('${p.id}')">
+
+            Preview
+
+          </button>
+
+
+          <button
+            class="btn green"
+            onclick="exportProject('${p.id}')">
+
+            ⇩ Export
+
+          </button>
+
+
+          <button
+            class="btn red"
+            onclick="deleteProject('${p.id}')">
+
+            ×
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* ================= ICON ================= */
+
+function projectIcon(subject){
+
+  const icons = {
+
+    PKWU:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3v4M12 17v4M3 12h4M17 12h4"/>
+        <circle cx="12" cy="12" r="5"/>
+      </svg>
+    `,
+
+    IPA:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5">
+        <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>
+        <path d="M8 15h8"/>
+      </svg>
+    `,
+
+    Biologi:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5">
+        <path d="M12 21C6 18 4 13 6 7c6 0 10 3 10 9-1 3-2 4-4 5Z"/>
+        <path d="M7 15c3-1 6-4 8-7"/>
+      </svg>
+    `,
+
+    Fisika:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5">
+        <path d="M13 2 5 13h6l-1 9 9-12h-6l0-8Z"/>
+      </svg>
+    `
+
+  };
+
+
+  return (
+    icons[subject] ||
+    `
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5">
+        <path d="M5 4h9l5 5v11H5z"/>
+        <path d="M14 4v6h6"/>
+      </svg>
+    `
+  );
+
+}
+
+
+/* ================= PROJECT ACTION ================= */
+
+function manageProject(id){
+
+  const p =
+    db.projects.find(
+      x=>x.id === id
+    );
+
+
+  if(!p) return;
+
+
+  toast(
+    "Membuka konfigurasi " +
+    p.name
+  );
+
+}
+
+
+function previewProject(id){
+
+  const p =
+    db.projects.find(
+      x=>x.id === id
+    );
+
+
+  if(!p) return;
+
+
+  if(!p.contentFile){
+
+    toast(
+      "Project belum memiliki Content Pack."
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    "Preview " +
+    p.name +
+    " siap dibuka."
+  );
+
+}
+
+
+function deleteProject(id){
+
+  const p =
+    db.projects.find(
+      x=>x.id === id
+    );
+
+
+  if(!p) return;
+
+
+  if(
+    !confirm(
+      "Hapus project \"" +
+      p.name +
+      "\"?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  db.projects =
+    db.projects.filter(
+      x=>x.id !== id
+    );
+
+
+  db.content =
+    db.content.filter(
+      x=>x.projectId !== id
+    );
+
+
+  db.activities.unshift({
+
+    icon:"×",
+
+    text:
+      p.name +
+      " dihapus",
+
+    time:
+      "Baru saja"
+
+  });
+
+
+  saveDB();
+
+  renderAll();
+
+  toast(
+    "Project berhasil dihapus."
+  );
+
+}
+
+
+/* ================= EXPORT ================= */
+
+function exportProject(id){
+
+  const p =
+    db.projects.find(
+      x=>x.id === id
+    );
+
+
+  if(!p) return;
+
+
+  const data = {
+
+    engine:{
+      name:db.engine.name,
+      version:db.engine.version,
+      architecture:
+        "MASTER ENGINE + CONTENT PACK"
+    },
+
+    project:p,
+
+    exportedAt:
+      new Date().toISOString()
+
+  };
+
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          data,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+
+  a.href=url;
+
+
+  a.download =
+    safeFileName(
+      p.name
+    ) +
+    "_PETA_MASTER.json";
+
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(url);
+
+
+  db.exports.push({
+
+    id:
+      "EXP-" +
+      Date.now(),
+
+    projectId:id,
+
+    date:
+      new Date().toISOString()
+
+  });
+
+
+  db.activities.unshift({
+
+    icon:"⇩",
+
+    text:
+      p.name +
+      " berhasil di-export",
+
+    time:
+      "Baru saja"
+
+  });
+
+
+  saveDB();
+
+  renderAll();
+
+
+  toast(
+    p.name +
+    " berhasil di-export."
+  );
+
+}
+
+
+/* ================= ACTIVITY ================= */
+
+function renderActivity(){
+
+  const container =
+    document.getElementById(
+      "activity"
+    );
+
+
+  if(!container) return;
+
+
+  if(!db.activities.length){
+
+    container.innerHTML = `
+
+      <div class="empty"
+           style="padding:25px">
+
+        <div class="empty-icon">
+          ⌁
+        </div>
+
+        <h3>
+          Belum ada aktivitas
+        </h3>
+
+        <p>
+          Activity Log akan terisi
+          setelah Anda menggunakan engine.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    db.activities
+      .slice(0,8)
+      .map(
+        a=>`
+
+          <div class="act">
+
+            <div class="act-ico">
+              ${a.icon}
+            </div>
+
+            <div>
+
+              <b>
+                ${escapeHTML(a.text)}
+              </b>
+
+              <small>
+                ${escapeHTML(a.time)}
+              </small>
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+/* ================= SETTINGS ================= */
+
+function saveSettings(){
+
+  const name =
+    document
+      .getElementById("engineName")
+      .value
+      .trim();
+
+
+  const version =
+    document
+      .getElementById("engineVersion")
+      .value
+      .trim();
+
+
+  if(name)
+    db.engine.name=name;
+
+
+  if(version)
+    db.engine.version=version;
+
+
+  saveDB();
+
+
+  toast(
+    "Pengaturan berhasil disimpan."
+  );
+
+}
+
+
+/* ================= RESET ================= */
+
+function resetAll(){
+
+  if(
+    !confirm(
+      "Semua project, content, student session " +
+      "dan export akan dihapus.\n\n" +
+      "Kembali ke kondisi awal 0?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  localStorage.removeItem(
+    DB_KEY
+  );
+
+
+  db =
+    JSON.parse(
+      JSON.stringify(
+        DEFAULT_DB
+      )
+    );
+
+
+  saveDB();
+
+  renderAll();
+
+
+  toast(
+    "MASTER ENGINE kembali ke kondisi awal 0."
+  );
+
+}
+
+
+/* ================= FORM RESET ================= */
+
+function clearForm(){
+
+  document.getElementById(
+    "projectName"
+  ).value="";
+
+
+  document.getElementById(
+    "subject"
+  ).value="";
+
+
+  document.getElementById(
+    "contentFile"
+  ).value="";
+
+
+  document.getElementById(
+    "fileName"
+  ).textContent="";
+
+}
+
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+
+function toast(message){
+
+  const el =
+    document.getElementById(
+      "toast"
+    );
+
+
+  el.textContent =
+    message;
+
+
+  el.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        el.classList.remove(
+          "show"
+        );
+      },
+      2400
+    );
+
+}
+
+
+/* ================= SECURITY ================= */
+
+function escapeHTML(value){
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+function safeFileName(value){
+
+  return String(value)
+    .replace(
+      /[^a-z0-9]+/gi,
+      "_"
+    )
+    .replace(
+      /^_+|_+$/g,
+      ""
+    );
+
+}
+
+
+/* ================= ESC KEY ================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="Escape"){
+      closeModal();
+    }
+
+  }
+);
+
+
+/* ================= ENGINE CHECK ================= */
+
+console.log(
+  "PETA-DIGITAL MASTER v2.0.0"
+);
+
+console.log(
+  "INITIAL STATE:",
+  {
+    projects:db.projects.length,
+    content:db.content.length,
+    students:db.students.length,
+    exports:db.exports.length
+  }
+);
+
+</script>
+
+</body>
+</html>
